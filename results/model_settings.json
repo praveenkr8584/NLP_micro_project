@@ -1,0 +1,30 @@
+{
+  "cbow": {
+    "sg": 0,
+    "vector_size": 100,
+    "window": 5,
+    "min_count": 5,
+    "epochs": 20,
+    "negative": 5,
+    "sample": 0.001,
+    "workers": 1,
+    "seed": 42,
+    "vocabulary": 12982
+  },
+  "skipgram": {
+    "sg": 1,
+    "vector_size": 100,
+    "window": 5,
+    "min_count": 5,
+    "epochs": 20,
+    "negative": 5,
+    "sample": 0.001,
+    "workers": 1,
+    "seed": 42,
+    "vocabulary": 12982
+  },
+  "timings": {
+    "cbow_seconds": 13.1,
+    "skipgram_seconds": 37.8
+  }
+}

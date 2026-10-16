@@ -1,0 +1,21 @@
+# virtual environments
+.venv/
+venv/
+w2v_env/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# trained models (re-created by `python main.py` in about one minute)
+models/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

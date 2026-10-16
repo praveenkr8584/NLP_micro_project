@@ -1,0 +1,28 @@
+{
+  "source": "Brown Corpus (Francis & Kucera, 1964/1979)",
+  "text_samples": 500,
+  "raw_sentences": 57340,
+  "raw_tokens_incl_punctuation": 1161192,
+  "sentences_kept": 44509,
+  "tokens_after_cleaning": 448314,
+  "vocabulary_size": 40209,
+  "vocabulary_min_count_5": 12982,
+  "avg_sentence_length": 10.07,
+  "sentences_per_genre_letter": {
+    "a": 3898,
+    "b": 2398,
+    "c": 1516,
+    "d": 1373,
+    "e": 3523,
+    "f": 4261,
+    "g": 6265,
+    "h": 2427,
+    "j": 6835,
+    "k": 2681,
+    "l": 2339,
+    "m": 568,
+    "n": 2942,
+    "p": 2696,
+    "r": 787
+  }
+}

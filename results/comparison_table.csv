@@ -1,0 +1,6 @@
+Word,Frequency,CBOW top 5,Skip-gram top 5,Common words,Overlap
+school,502,"schools, teacher, divinity, graduate, structured","retarded, desegregation, elementary, graduates, mentally",-,0/5
+government,432,"constitution, foreign, governments, coalition, abolish","belgian, governments, balafrej, currency, yugoslavia",governments,1/5
+water,442,"ice, hot, salt, cooled, soil","rinse, bucket, frontage, boil, reservoir",-,0/5
+war,482,"renowned, battle, citizen, civil, wars","civil, fronts, korean, custer, propaganda",civil,1/5
+house,573,"sox, hotel, mob, kent, apartment","siding, coffin, barber, livery, fireplace",-,0/5
