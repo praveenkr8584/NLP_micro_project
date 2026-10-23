@@ -21,7 +21,7 @@ In my example, CBOW uses *students, learn, in, college* to predict *programming*
 
 **Which one is faster? Why?**
 CBOW is faster. It makes one training example per centre word. Skip-gram makes one example for every context word.
-In my project CBOW took about 13 seconds and Skip-gram about 38 seconds.
+In my project CBOW took about 29.8 seconds and Skip-gram about 81.9 seconds.
 
 **Which one is usually better for rare words?**
 Skip-gram. Each context word gets its own training example, so rare words get more updates.

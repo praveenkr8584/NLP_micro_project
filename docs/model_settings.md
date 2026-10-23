@@ -19,7 +19,7 @@ and asserts that `sg` is the only difference.
 | `seed` | 42 | 42 | fixed random seed |
 | vocabulary size | 12,982 | 12,982 | words that survived `min_count` (identical, as expected) |
 
-Other gensim settings keep their default values (for example learning rate `alpha=0.025`).
+Other gensim settings keep their default values: initial learning rate `alpha=0.025`, final learning rate `min_alpha=0.0001`. Both are now recorded in `results/model_settings.json` on every run.
 
 ## Why these values
 * **vector_size=100, window=5, min_count=5** are common defaults and a good fit for a corpus of this size.
@@ -28,7 +28,7 @@ Other gensim settings keep their default values (for example learning rate `alph
   gave exactly the same neighbours and scores each time.
 
 ## Training time (on the machine used to build the project)
-CBOW about 13 seconds, Skip-gram about 38 to 40 seconds. Skip-gram is slower because it creates one
+CBOW 29.8 seconds, Skip-gram 81.9 seconds (~2.7× slower). Skip-gram is slower because it creates one
 training example for every context word, while CBOW creates one example per centre word.
 
 ## Similarity measure

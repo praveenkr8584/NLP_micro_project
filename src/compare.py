@@ -103,7 +103,11 @@ def similarity_agreement(cbow: Word2Vec, skip: Word2Vec, word: str) -> float:
     Both models are asked: "how similar is `word` to EVERY other word?"
     A value near 1 means they rank the whole vocabulary in a similar order.
     """
-    assert cbow.wv.index_to_key == skip.wv.index_to_key, "vocabularies differ"
+    if cbow.wv.index_to_key != skip.wv.index_to_key:
+        raise ValueError(
+            "CBOW and Skip-gram vocabularies differ — both models must be trained "
+            "on the same corpus with the same min_count."
+        )
     c = cbow.wv.cosine_similarities(cbow.wv[word], cbow.wv.vectors)
     s = skip.wv.cosine_similarities(skip.wv[word], skip.wv.vectors)
     mask = np.arange(len(c)) != cbow.wv.key_to_index[word]  # ignore the word itself

@@ -17,7 +17,7 @@ All numbers come from `python main.py` / the notebook and are saved in `results/
 | war | 482 | renowned, battle, citizen, civil, wars | civil, fronts, korean, custer, propaganda | civil | 1/5 |
 | house | 573 | sox, hotel, mob, kent, apartment | siding, coffin, barber, livery, fireplace | – | 0/5 |
 
-The cosine scores are in `results/neighbours_with_scores.csv`.
+The cosine scores are in [`results/neighbours_with_scores.csv`](../results/neighbours_with_scores.csv).
 
 ## 2. Which relationships look meaningful?
 

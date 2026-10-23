@@ -1,5 +1,6 @@
 """Train the CBOW and Skip-gram models with identical settings."""
 import time
+import warnings
 from typing import Dict, List, Optional, Tuple
 
 from gensim.models import Word2Vec
@@ -42,6 +43,8 @@ def model_settings(model: Word2Vec) -> Dict:
         "epochs": model.epochs,
         "negative": model.negative,
         "sample": model.sample,
+        "alpha": model.alpha,
+        "min_alpha": model.min_alpha,
         "workers": model.workers,
         "seed": model.seed,
         "vocabulary": len(model.wv),
@@ -67,7 +70,8 @@ def load_models() -> Optional[Tuple[Word2Vec, Word2Vec]]:
     try:
         cbow = Word2Vec.load(str(cbow_path))
         skip = Word2Vec.load(str(skip_path))
-    except Exception:  # damaged file or incompatible gensim version
+    except Exception as exc:  # damaged file or incompatible gensim version
+        warnings.warn(f"Could not load saved models ({exc}); they will be retrained.")
         return None
     checked = ("vector_size", "window", "min_count", "epochs", "negative", "sample", "seed")
     for model, sg in ((cbow, 0), (skip, 1)):
