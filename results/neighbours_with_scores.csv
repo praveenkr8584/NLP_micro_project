@@ -42,7 +42,7 @@ war,Skip-gram,5,propaganda,0.509
 house,CBOW,1,sox,0.685
 house,CBOW,2,hotel,0.578
 house,CBOW,3,mob,0.545
-house,CBOW,4,kent,0.52
+house,CBOW,4,kent,0.519
 house,CBOW,5,apartment,0.515
 house,Skip-gram,1,siding,0.505
 house,Skip-gram,2,coffin,0.492

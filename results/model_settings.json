@@ -24,7 +24,7 @@
     "vocabulary": 12982
   },
   "timings": {
-    "cbow_seconds": 13.1,
-    "skipgram_seconds": 37.8
+    "cbow_seconds": 29.8,
+    "skipgram_seconds": 81.9
   }
 }
