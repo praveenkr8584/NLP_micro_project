@@ -11,8 +11,8 @@ __pycache__/
 # Jupyter
 .ipynb_checkpoints/
 
-# trained models (re-created by `python main.py` in about one minute)
-models/
+# trained models are now committed so the web app loads instantly on Streamlit Cloud
+# models/
 
 # OS / editor
 .DS_Store
