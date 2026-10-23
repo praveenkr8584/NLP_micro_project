@@ -1,6 +1,6 @@
 """Train the CBOW and Skip-gram models with identical settings."""
 import time
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from gensim.models import Word2Vec
 
@@ -52,3 +52,27 @@ def save_models(cbow: Word2Vec, skip: Word2Vec) -> None:
     config.MODELS_DIR.mkdir(parents=True, exist_ok=True)
     cbow.save(str(config.MODELS_DIR / "cbow.model"))
     skip.save(str(config.MODELS_DIR / "skipgram.model"))
+
+
+def load_models() -> Optional[Tuple[Word2Vec, Word2Vec]]:
+    """Load the saved models, or return None if they are missing or out of date.
+
+    "Out of date" means the saved settings differ from config.W2V_PARAMS, so the
+    web app never shows results that do not match the current settings.
+    """
+    cbow_path = config.MODELS_DIR / "cbow.model"
+    skip_path = config.MODELS_DIR / "skipgram.model"
+    if not (cbow_path.exists() and skip_path.exists()):
+        return None
+    try:
+        cbow = Word2Vec.load(str(cbow_path))
+        skip = Word2Vec.load(str(skip_path))
+    except Exception:  # damaged file or incompatible gensim version
+        return None
+    checked = ("vector_size", "window", "min_count", "epochs", "negative", "sample", "seed")
+    for model, sg in ((cbow, 0), (skip, 1)):
+        if model.sg != sg:
+            return None
+        if any(getattr(model, key) != config.W2V_PARAMS[key] for key in checked):
+            return None
+    return cbow, skip

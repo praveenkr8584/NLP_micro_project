@@ -7,3 +7,5 @@ jupyter
 ipykernel
 nbformat
 pytest
+streamlit>=1.50
+altair>=5

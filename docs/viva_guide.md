@@ -94,3 +94,16 @@ Visualise the vectors in 2D with PCA or t-SNE, test several seeds and window siz
 * "The two models gave different top-five lists, but their overall similarity scores agree."
 * "Skip-gram's neighbours were rarer and more specific."
 * "A larger corpus would make the results more reliable."
+
+## 5. Demonstrating the web app (2 minutes)
+Run `streamlit run app.py` before the viva. Suggested order:
+1. **Explore a word:** choose *water*. Say: "On the left is CBOW, on the right is Skip-gram. Blue is always CBOW and orange is always Skip-gram. The bars show cosine similarity."
+2. Point at the *Median neighbour count*: "CBOW prefers frequent words, Skip-gram prefers rarer, more specific words."
+3. **Word map:** "This is a 2D picture of the vectors. Close points are similar. I can only compare points inside one panel, because the two models have different vector spaces."
+4. **Evidence:** "I did not only check five words. I checked the 200 most frequent words, and the average overlap was 0.63 out of 5, much higher than chance."
+5. **How it works:** type the example sentence and show that Skip-gram creates more training examples than CBOW.
+
+Questions you may get about the app:
+* **Why PCA for the map?** It is a simple way to show high-dimensional vectors in 2D. It keeps only part of the information (the app shows how much), so the picture is a guide, not exact.
+* **Why do the same words have different scores in the two models?** The models have different vector spaces, so cosine scores are not directly comparable. I compare the order of the words.
+* **What does the app do on first start?** It loads the saved models, or trains both models (about 1 to 2 minutes) and saves them.

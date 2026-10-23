@@ -25,6 +25,25 @@ and compared the five most similar words for five frequent words.
 
 Full explanation: [`docs/results_explanation.md`](docs/results_explanation.md)
 
+## Interactive web app
+
+Explore the results yourself: pick any word, compare the two models side by side, see a 2D word map and check the
+evidence over the whole corpus. Run it with `streamlit run app.py` (see "How to run" below).
+
+| Tab | What it shows |
+|---|---|
+| **Explore a word** | Search any word in the vocabulary. Top-N neighbours of both models as bar charts, shared words, agreement score |
+| **Assignment table** | The comparison table from the assignment for any words you choose, with CSV download |
+| **Word map** | 2D picture (PCA) of a word and its nearest neighbours in each model, with zoom and hover |
+| **Evidence** | Overlap over the 200 most frequent words, neighbour frequency, WordSim-353 test, corpus and model settings |
+| **How it works** | Type a sentence and see the training examples CBOW and Skip-gram create from it |
+
+Blue always means CBOW and orange always means Skip-gram. The app follows the computer's light or dark theme.
+
+![Explore a word](docs/images/app_explore.png)
+![Word map](docs/images/app_word_map.png)
+![Evidence](docs/images/app_evidence.png)
+
 ## What is submitted
 
 | Required item | Where |
@@ -35,7 +54,8 @@ Full explanation: [`docs/results_explanation.md`](docs/results_explanation.md)
 | Comparison table | in the notebook, and [`results/comparison_table.csv`](results/comparison_table.csv) |
 | Short explanation of the results | notebook section 8, and [`docs/results_explanation.md`](docs/results_explanation.md) |
 
-Also included: [`docs/viva_guide.md`](docs/viva_guide.md) (questions and answers for the viva).
+Also included: the interactive web app (`app.py`) and [`docs/viva_guide.md`](docs/viva_guide.md)
+(questions and answers for the viva).
 
 ## Project structure
 
@@ -43,6 +63,8 @@ Also included: [`docs/viva_guide.md`](docs/viva_guide.md) (questions and answers
 word2vec-cbow-vs-skipgram/
 ├── README.md
 ├── main.py                      run the whole pipeline from the command line
+├── app.py                       interactive web app (Streamlit)
+├── .streamlit/config.toml       app theme (light and dark)
 ├── requirements.txt             libraries (flexible versions)
 ├── requirements-lock.txt        exact versions the project was tested with
 ├── data/
@@ -53,16 +75,19 @@ word2vec-cbow-vs-skipgram/
 │   ├── data.py                  read the Brown Corpus
 │   ├── preprocess.py            clean and tokenize
 │   ├── train.py                 train CBOW and Skip-gram (only sg differs)
-│   └── compare.py               tables, overlap, agreement, WordSim test
+│   ├── compare.py               tables, overlap, agreement, WordSim test
+│   └── viz.py                   data helpers for the web app (word map, examples)
 ├── notebooks/word2vec_comparison.ipynb
-├── docs/                        corpus description, model settings, results, viva guide
+├── docs/                        corpus description, model settings, results, viva guide, images
 ├── results/                     CSV and JSON files produced by the run
-└── tests/test_project.py        5 small tests
+├── models/                      saved models (created on first run, not stored in Git)
+└── tests/test_project.py        9 small tests
 ```
 
 ## How to run
 
-**Requirements:** Python 3.10 or newer (the project was tested with Python 3.13).
+**Requirements:** Python 3.10 to 3.13. gensim, the library that provides Word2Vec, has no Python 3.14 package yet
+(checked on PyPI in October 2026). If your main Python is 3.14, use the `uv` steps below.
 
 ```bash
 # 1. create a virtual environment (nothing is installed globally)
@@ -75,17 +100,35 @@ source .venv/bin/activate         # Linux / macOS
 # 3. install the libraries
 pip install -r requirements.txt
 
-# 4a. run the notebook
+# 4a. open the interactive web app (first start trains the models, about 1 to 2 minutes)
+streamlit run app.py
+
+# 4b. or run the notebook
 jupyter notebook notebooks/word2vec_comparison.ipynb
 
-# 4b. or run everything from the command line (about 1 minute)
+# 4c. or run everything from the command line (about 1 minute)
 python main.py
 
 # 5. optional: run the tests
 python -m pytest -q
 ```
 
-`python main.py` rewrites the files in `results/`. No internet is needed because the corpus is in the repository.
+`python main.py` rewrites the files in `results/` and saves the models in `models/`, which the web app then loads
+instantly. No internet is needed because the corpus is in the repository. If Streamlit asks for an e-mail address on
+the first start, just press Enter.
+
+### If your main Python is 3.14 (Windows, PowerShell)
+`uv` gives this project its own Python 3.12 inside `.venv`. Nothing is installed globally and your Python 3.14
+stays unchanged.
+
+```powershell
+winget install --id astral-sh.uv -e
+# open a new terminal (or refresh PATH), then, inside the project folder:
+uv venv --python 3.12 .venv
+.venv\Scripts\activate
+uv pip install -r requirements.txt
+streamlit run app.py
+```
 
 ## Method in short
 
@@ -106,8 +149,9 @@ change some scores slightly. Exact versions are in `requirements-lock.txt`.
 Small corpus, one seed, one set of settings, stopwords removed, and ambiguous words such as *house*.
 See `docs/results_explanation.md`.
 
-## Possible next step
-A 2D visualisation (PCA or t-SNE) of the five words and their neighbours.
+## Possible next steps
+Repeat the experiment with several seeds, vary `window` or `vector_size`, try t-SNE instead of PCA for the word map,
+or train on a larger corpus.
 
 ## Data licence and credits
 * Brown Corpus: W. N. Francis and H. Kucera, Brown University (1964, revised 1971 and 1979). Its README allows

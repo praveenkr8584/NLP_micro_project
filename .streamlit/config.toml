@@ -1,0 +1,22 @@
+[browser]
+gatherUsageStats = false
+
+[server]
+runOnSave = false
+
+[client]
+toolbarMode = "minimal"
+
+# Colours come from a validated chart palette (blue = CBOW, orange = Skip-gram).
+# Light and dark themes both exist; the app follows the computer's setting.
+[theme.light]
+primaryColor = "#2a78d6"
+backgroundColor = "#fcfcfb"
+secondaryBackgroundColor = "#f1f0ec"
+textColor = "#0b0b0b"
+
+[theme.dark]
+primaryColor = "#3987e5"
+backgroundColor = "#1a1a19"
+secondaryBackgroundColor = "#242422"
+textColor = "#f0efec"
