@@ -86,7 +86,7 @@ word2vec-cbow-vs-skipgram/
 │   ├── raw/brown.zip                 Brown Corpus (bundled; no download required)
 │   └── processed/brown_sentences.txt cleaned sentences, one per line (space-separated tokens)
 │
-├── models/                           saved models (git-ignored; re-created on first run)
+├── models/                           saved models (committed; loads instantly on Streamlit Cloud)
 │   ├── cbow.model
 │   └── skipgram.model
 │
